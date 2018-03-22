@@ -1,4 +1,4 @@
-var WebSocket = require('ws');
+var WebSocket = require("ws");
 var WebSocketServer = WebSocket.Server;
 var port = 3001;
 var ws = new WebSocketServer({
@@ -6,11 +6,10 @@ var ws = new WebSocketServer({
 });
 var messages = [];
 var topic;
+console.log("websockets server started");
 
-console.log('websockets server started');
-
-ws.on('connection', function(socket) {
-  console.log('client connection established');
+ws.on("connection", function(socket) {
+  console.log("client connection established");
 
 
   if (topic) {
@@ -21,8 +20,8 @@ ws.on('connection', function(socket) {
     socket.send(msg);
   });
 
-  socket.on('message', function(data) {
-    console.log('message received: ' + data);
+  socket.on("message", function(data) {
+    console.log("message received: " + data);
     if (data.indexOf("/topic") != -1) {
       var changedTopic = "*** Topic has changed to " + "'" + data.substring(7, data.length) + "'";
       topic = data.substring(7, data.length);
